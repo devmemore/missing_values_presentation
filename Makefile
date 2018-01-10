@@ -1,7 +1,7 @@
 all: compile
-	echo "done";
+	make view
 
-compile:
+compile: missing_values.pdf
 	pdflatex missing_values.tex
 
 view:
