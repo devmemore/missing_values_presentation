@@ -14,7 +14,10 @@
 \titlepage
 \end{frame}
 
+
+\section[introduction]{introduction}
 \begin{frame}
+\frametitle{Introduction}
 	\begin{center}
 	\Huge Why this presentation ?
 	\end{center}
@@ -23,7 +26,7 @@
 \begin{frame}
   \begin{tikzpicture}[remember picture,overlay]
    \node[at=(current page.center)] {
-     \includegraphics[width=\paperwidth]{22ftbs.jpg}
+     \includegraphics[width=\paperwidth]{images/22ftbs.jpg}
      };
   \end{tikzpicture}
 \end{frame}
@@ -35,10 +38,8 @@
 % - Technical issues can occur without warnings and you can't recover past data.
 % ONE INDUSTRY EXAMPLE
 %
-
+\subsection[Missing values in Data Driven Business]{}
 \begin{frame}
-\frametitle{Introduction}
-	\framesubtitle{Missing values in Data Driven Business}
 	Why am I talking about missing values ?
         \begin{enumerate}
 		\item<1- | alert@1> Because it's everywhere.
@@ -47,20 +48,16 @@
 	\end{enumerate}
 \end{frame}
 
+\subsection[Definition of nissing value]{}
 \begin{frame}
-  \frametitle{Introduction}
-  \framesubtitle{A definition of missing values/data}
   \textsc{Missing values}, what is it ?
   \begin{quote}
   Wikipedia : In statistics, missing data, or missing values, occur when no data value is stored for the variable in an observation. Missing data are a common occurrence and can have a significant effect on the conclusions that can be drawn from the data
   \end{quote}
-  \includegraphics[width=25cm]{missingvalues.png}
+  \includegraphics[width=25cm]{images/image_missingvalues.png}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Introduction}
-  \framesubtitle{Dealing with missingness is a science}
-
   \begin{enumerate}
       \item<1- | alert@1> 
   \end{enumerate}
@@ -68,8 +65,63 @@
   
 \end{frame}
 
+\section*{Sommaire}
+	\begin{frame}
+		  \tableofcontents[]
+	\end{frame}      
+
+\section[A simple case]{A simple case : Clinical trial on different antidepressant}
+\subsection{case description}
 \begin{frame}
-  \frametitle{References}
+	\begin{itemize}
+		\item<1->6 centre clinical trial, comparing 3 treatments of depression
+		\item<2->367 subjects randomised to one of 3 treatments
+		\item<3->subjects rated on HAMD score (0 to 50)  on 5 weekly visits
+		\item<4-> Subjects drop out from week 2 onwards (246 complete cases)
+	\end{itemize}
+	Study objectives : compare efficiency of the 3 treatments over time. metric : HAMD
+\end{frame}
+
+\begin{frame}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[at=(current page.center)] {
+     \includegraphics[width=\paperwidth]{images/HAMD_response_profile.png}
+     };
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[at=(current page.center)] {
+     \includegraphics[width=\paperwidth]{images/HAMD_all_response_by_dropout_pattern.png}
+     };
+  \end{tikzpicture}
+\end{frame}
+
+
+\subsection{What not to do}
+\begin{frame}
+	\begin{itemize}
+	    \item<1->Don't drop uncomplete cases (listwise deletion)
+	    \item<2->Don't do Last obeservation carried forward
+        \end{itemize}
+        \begin{quote}
+		Don't mess with missing data \it{Thomas L.}
+	\end{quote}
+\end{frame}
+
+\begin{frame}
+\Huge How would you proceed ?	
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+	\item<1->
+	\end{itemize}
+\end{frame}
+
+\section{references}
+\begin{frame}
 	\begin{itemize}
 		\item<1->Constructing Models to Deal With Missing Data | SciPy 2016 | Deborah Hanus, https://www.youtube.com/watch?v=cHzahWjaA7o
 	\end{itemize}
