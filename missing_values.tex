@@ -70,15 +70,7 @@
   \includegraphics[width=25cm]{images/image_missingvalues.png}
 \end{frame}
 
-\begin{frame}
-  \begin{enumerate}
-      \item<1- | alert@1> 
-  \end{enumerate}
-
-  
-\end{frame}
-
-\section*{Sommaire}
+\section*{Table of content}
 	\begin{frame}
 		  \tableofcontents[]
 	\end{frame}      
@@ -149,9 +141,9 @@ Don't replace missing values by last observed values. Even if it is widely used 
 
 \begin{frame}
 	\begin{itemize}
-		\item This study using listwise deletion ended up with : 1 \sim 2, 1 \sim 3, 2 \geq 3
-		\item This study using LOCF ended up with 1 \sim 2, 1 \sim 3, 2 \sim 3
-        	\item This study using bayesian analysis ended up with 1 \leq 2, 1 \sim 3, 2 \geq 3
+		\item This study using listwise deletion ended up with : 1 \sim 2, 1 \sim 3, 2 \geq 3.
+		\item This study using LOCF ended up with 1 \sim 2, 1 \sim 3, 2 \sim 3.
+        	\item This study using bayesian analysis ended up with 1 \leq 2, 1 \sim 3, 2 \geq 3.
 	\end{itemize}
         \begin{quote}
 		"Don't mess with missing data" \textit{Thomas L.}
@@ -203,19 +195,64 @@ Don't replace missing values by last observed values. Even if it is widely used 
         \item CDM : little's \chi^2 test, R's mcartest package
 	\end{itemize}\\
         \textbf{How little's test work ?}\\
-        H_0 : y_o_i\vertr_i \sim N(\mu,\sigma)\\
-        H_1 : y_o_i\vertr_i \sim N(\mu,\sigma)
+        H_0 : y_o_i\vert r_i \sim N(\mu,\sigma)\\
+        H_1 : y_o_i\vert r_i \sim N(\alpha,\beta)\\
 \end{frame}
 
 
 \subsection{Data preparation and modeling}
+\begin{frame}
+\textbf{What do i do now ?}
+\begin{itemize}
+\item listwise deletion if required assumption are verified 
+\item make a model that is able to handle missingness : feature enginerring
+\item perform simple/multiple imputation
+\item do nothing : don't waste time if it's impossible
+\end{itemize}\\
+Don't forget that you are not in a Kaggle competition, you can invest money to recover missing values
+\end{frame}
+
+\section{Multiple Imputation}
+\begin{frame}
+\textbf{An art of playing with fire : generating data from void}\\
+There are different technics as it is an open research subject
+\begin{itemize}
+\item MICE : simple, handy, good empirical results, but lacks of theoritical background   
+\item Bayesian approches : theoriticaly and praticaly state of the art
+\item Autoencoder/decoder NN : fancy but no theoritical background
+\end{itemize}
+\end{frame}
+
+\subsection{MICE}
+\begin{frame}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[at=(current page.center)] {
+     \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/MICE.png}
+     };
+  \end{tikzpicture}
+\end{frame}
+
+
+\subsection{Bayesian apporach}
+\begin{frame}
+  \begin{tikzpicture}[remember picture,overlay]
+   \node[at=(current page.center)] {
+     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{images/MICE.png}
+     };
+  \end{tikzpicture}
+\end{frame}
+
+\section{Conclusion}
 \begin{frame}
 \end{frame}
 
 \section{references}
 \begin{frame}
 	\begin{itemize}
-		\item<1->Constructing Models to Deal With Missing Data | SciPy 2016 | Deborah Hanus, https://www.youtube.com/watch?v=cHzahWjaA7o
+		\item Constructing Models to Deal With Missing Data | SciPy 2016 | Deborah Hanus, https://www.youtube.com/watch?v=cHzahWjaA7o
+                \item http://www.bias-project.org.uk/papers/NonTechnicalMissingTalkSlides.pdf
+                \item http://www.stata-journal.com/sjpdf.html?articlenum=st0318
+                \item https://www.linkedin.com/pulse/imputing-missing-data-playing-fire-jehan-gonsal/?trackingId=R3Li3WglgwDRafeF95nAJw%3D%3D
 	\end{itemize}
 \end{frame}
 
