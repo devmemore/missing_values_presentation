@@ -1,5 +1,7 @@
 \documentclass{beamer}
 \usepackage{tikz}
+%\usepgfplotslibrary{external} 
+%\tikzexternalize
 \usepackage{lmodern}% http://ctan.org/pkg/lm
 \usepackage[utf8]{inputenc}
 \usetheme{Warsaw}
@@ -8,6 +10,18 @@
 \subtitle{A thorn in the side}
 \author{Thomas LOUIS}\institute{Data scientist}
 
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
 \begin{document}
 
 \begin{frame}
@@ -15,11 +29,10 @@
 \end{frame}
 
 
-\section[introduction]{introduction}
+\section{introduction}
 \begin{frame}
-\frametitle{Introduction}
 	\begin{center}
-	\Huge Why this presentation ?
+	\Large Why this presentation ?
 	\end{center}
 \end{frame}
 
@@ -77,9 +90,10 @@
 		\item<1->6 centre clinical trial, comparing 3 treatments of depression
 		\item<2->367 subjects randomised to one of 3 treatments
 		\item<3->subjects rated on HAMD score (0 to 50)  on 5 weekly visits
-		\item<4-> Subjects drop out from week 2 onwards (246 complete cases)
+		\item<4->Subjects drop out from week 2 onwards (246 complete cases)
+		\item<5->Study objectives : compare efficiency of the 3 treatments over time. metric : HAMD
+	        \item<6-> Metric : HAMD score changes over the time
 	\end{itemize}
-	Study objectives : compare efficiency of the 3 treatments over time. metric : HAMD
 \end{frame}
 
 \begin{frame}
@@ -99,25 +113,103 @@
 \end{frame}
 
 
-\subsection{What not to do}
+
+\begin{frame}
+\Large How would you proceed ?	
+\end{frame}
+
+
+\subsection{what not to do}
+\begin{frame}
+Don't drop uncomplete cases
+	\begin{itemize}
+        \item You will miss the information of 33 \% of individuals 
+        \item You make the assumption that the individual that dropout the study are statistically the same than those who don't
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+Don't replace missing values by last observed values. Even if it is widely used in clinical trials.
+	\begin{itemize}
+\item It implies strong assumption that treatment doesn't work once individual drop out early. 
+\item It also implies that HAMD score will not raise after the individual leave the study. so the result might be better thatn the real effect of the treatment
+	\end{itemize}
+\end{frame}
+
+\subsection{what to do}
+\begin{frame}
+	\Large Do something that is statistically not wrong :
+	\begin{itemize}
+		\item Frequentist
+		\item Likelihood 
+		\item Bayesian 
+        \end{itemize}
+        Bayesian approach : prior, likelihood, posterior
+\end{frame}
+
 \begin{frame}
 	\begin{itemize}
-	    \item<1->Don't drop uncomplete cases (listwise deletion)
-	    \item<2->Don't do Last obeservation carried forward
-        \end{itemize}
+		\item This study using listwise deletion ended up with : 1 \sim 2, 1 \sim 3, 2 \geq 3
+		\item This study using LOCF ended up with 1 \sim 2, 1 \sim 3, 2 \sim 3
+        	\item This study using bayesian analysis ended up with 1 \leq 2, 1 \sim 3, 2 \geq 3
+	\end{itemize}
         \begin{quote}
-		Don't mess with missing data \it{Thomas L.}
+		"Don't mess with missing data" \textit{Thomas L.}
 	\end{quote}
 \end{frame}
 
+\section{data science in action}
+
+\subsection{Become a CRISP-DM zealot}
 \begin{frame}
-\Huge How would you proceed ?	
+        \Large{How to become a CRISP-DM zealot}
+	\textbf{Cross Industry Standard Process for Data Mining}
+	\begin{enumerate}
+		\item<1- | alert@1> Business Understanding 
+		\item<2- | alert@2> Data understanding + KPI definition 
+		\item<3- | alert@3> Modeling (start with a baseline) 
+		\item<4- | alert@4> Evaluation  
+		\item<5- | alert@5> Iterate 4-5 Until KPI are reached 
+		\item<6- | alert@6> Deployment  
+		\item<8- | alert@7> Monitoring 
+	\end{enumerate}
+\end{frame}
+
+\subsection{Understanding data}
+\begin{frame}
+        \textbf{Understanding data}
+	\begin{itemize}
+		\item<1- | alert@1> Why is it missing ? 
+		\item<2- | alert@2> Is it really missing ?  
+		\item<3- | alert@3> "Nan" may not be the only missing data
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
+	\textbf{Let's talk about missingness}
 	\begin{itemize}
-	\item<1->
+		\item<1- | alert@1> MCAR : P(R \vert Y_m,Y_o,X) = P(R) 
+		\item<2- | alert@2> MAR : P(R \vert Y_m,Y_o,X) = Pr(R \vert Y_o,X)
+		\item<3- | alert@3> CDM : P(R\vert Y_m,Y_o,X) = P(R \vert X) 
+                \item<4- | alert@4> MNAR : none of them
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+        \textbf{How to test it ?}
+	\begin{itemize}
+	\item MCAR : little's \chi^2 test, R's mcartest package
+        \item MAR : your nose, or more information
+        \item CDM : little's \chi^2 test, R's mcartest package
+	\end{itemize}\\
+        \textbf{How little's test work ?}\\
+        H_0 : y_o_i\vertr_i \sim N(\mu,\sigma)\\
+        H_1 : y_o_i\vertr_i \sim N(\mu,\sigma)
+\end{frame}
+
+
+\subsection{Data preparation and modeling}
+\begin{frame}
 \end{frame}
 
 \section{references}
@@ -133,3 +225,4 @@
 % some references :
 % - Constructing Models to Deal With Missing Data | SciPy 2016 | Deborah Hanus, https://www.youtube.com/watch?v=cHzahWjaA7o
 % - http://www.bias-project.org.uk/papers/NonTechnicalMissingTalkSlides.pdf
+% - http://www.stata-journal.com/sjpdf.html?articlenum=st0318
